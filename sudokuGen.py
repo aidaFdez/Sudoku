@@ -67,7 +67,7 @@ def createSudo (visit, que):
         return que[0]
     #If the sudoku is not completed, keep completing it
     if not (que[0] in visit):
-        a = random.randint(0,4)
+        a = random.randint(1,4)
         l = 0
         possibles = nextOnes(a, que[0])
         #If the sudoku is not possible to complete from that state,the length of possibles is 0
