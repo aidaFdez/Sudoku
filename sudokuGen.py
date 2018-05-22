@@ -2,7 +2,7 @@ import numpy
 import random
 
 visited = [] #Array of the visited states
-queue = [] #Array with the queue of states to visit, will be used as a stack.
+queue = [[]] #Array with the queue of states to visit, will be used as a stack.
 #sudoku = numpy.zeros(81)
 
 def checkPossible (position, number, sudo):
@@ -61,19 +61,33 @@ def nextOnes(num, sudo):
         l = l+1
     return toRet
 
-def createSudo (visit, que):
+#def createSudo (visit, que):
     #If the sudoku is completed, then return it
-    if (len (que[0]) == 81): #and not (que[0][80]==0):
-        return que[0]
+#    if (len (que[0]) == 81): #and not (que[0][80]==0):
+#        return que[0]
     #If the sudoku is not completed, keep completing it
-    if not (que[0] in visit):
-        a = random.randint(0,9)
-        l = 0
-        possibles = nextOnes(a, que[0])
+#    if not (que[0] in visit):
+#        a = random.randint(1,9)
+#        possibles = nextOnes(a, que[0])
         #If the sudoku is not possible to complete from that state,the length of possibles is 0
-        if len(possibles) == 0:
-            return createSudo (visit, que[1:])
+#        if len(possibles) == 0:
+#            return createSudo (visit, que[1:])
+#        else:
+#            que = possibles + que
+#            return createSudo (visit, que)
+#    return createSudo(visit, que[1:])
+
+def createSudo (visit, que):
+    while not (len(que[0]) == 81):
+        if que[0] in visit:
+            que = que[1:]
         else:
-            que = possibles + que
-            return createSudo (visit, que)
-    return createSudo(visit, que[1:])
+            visit = visit + que[0]
+            a = random.randint(1,9)
+            possibles = nextOnes(a,que[0])
+            if len(possibles) == 0:
+                que = que[1:]
+            else:
+                que = possibles + que
+        print(len(que[0]))
+    return que[0]
