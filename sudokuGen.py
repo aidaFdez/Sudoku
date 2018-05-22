@@ -49,14 +49,16 @@ def addOne(number):
     return (number +1)
 
 #List of the possible next states given another
-def nextOnes(num, sudo):
+def nextOnes(num, sudo, visit):
     l = 0
     toRet = []
     while l<9:
         #print (l)
         #print (checkPossible(len(sudo),num, sudo + [0]))
         if checkPossible(len(sudo),num, sudo + [0]):
-            toRet.append(sudo + [num])
+            #Do not add if it has been visited
+            if not (sudo + [num]) in visit:
+                toRet.append(sudo + [num])
         num = addOne(num)
         l = l+1
     return toRet
@@ -78,16 +80,21 @@ def nextOnes(num, sudo):
 #    return createSudo(visit, que[1:])
 
 def createSudo (visit, que):
-    while not (len(que[0]) == 81):
+    l = 0
+    #while not (len(que[0]) == 81):
+    while l<100:
+        print(que)
         if que[0] in visit:
             que = que[1:]
         else:
             visit = visit + que[0]
             a = random.randint(1,9)
-            possibles = nextOnes(a,que[0])
+            possibles = nextOnes(a,que[0], visit)
             if len(possibles) == 0:
                 que = que[1:]
             else:
                 que = possibles + que
-        print(len(que[0]))
+        #print (len(que[0]))
+        print(" \n")
+        l = l+1
     return que[0]
