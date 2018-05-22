@@ -41,7 +41,31 @@ def checkPossible (position, number, sudo):
         j = j+1
     return True
 
-#array.insert(index, value)
+def addOne(number):
+    if number == 9:
+        return 1
+    return (number +1)
+
 def createSudo (visit, que):
+    #If the sudoku is completed, then return it
     if (len (que[0]) == 81) and not (que[0][80]==0):
         return que[0]
+
+    #If the sudoku is not completed, keep completing it
+    if not (que[0] in visit):
+        a = random.randint(0,9)
+        l = 0
+        possibles = []
+        while l < 10:
+            visiting = que[0] + [0]
+            if checkPossible(len(que[0]), a, que[0]):
+                state = que[0] + [a]
+                visit.appen(state)
+                possibles.append(state)
+            a = addOne(a)
+            l = l+1
+        #If the sudoku is not possible to complete from that state,the length of possibles is 0
+        if len(possibles) == 0:
+            createSudo (visit, que[1:])
+        else:
+            que = possibles + que
