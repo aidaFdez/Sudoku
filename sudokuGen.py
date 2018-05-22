@@ -9,6 +9,7 @@ def checkPossible (position, number, sudo):
     numB = position % 9
     i = 0
     j = numB
+    sudo = sudo + [0]
 
     #Checks that number does not happen in the same column.
     while j < position:
@@ -29,7 +30,8 @@ def checkPossible (position, number, sudo):
 
     #Checks the number does not happen in the same square.
     j = 0
-    while ((k< position) and (j < 3)):
+    b = 0
+    while ((k< position) and (j < 3) and (b<position)):
         b = k
         l = 0
         while l<3:
@@ -46,9 +48,20 @@ def addOne(number):
         return 1
     return (number +1)
 
+#List of the possible next states given another
+def nextOnes(num, sudo):
+    l = 0
+    toRet = []
+    while l<10:
+        if checkPossible(len(sudo),num, sudo + [0]):
+            toRet.append(sudo + [num])
+        num = addOne(num)
+        l = l+1
+    return toRet
+
 def createSudo (visit, que):
     #If the sudoku is completed, then return it
-    if (len (que[0]) == 81) and not (que[0][80]==0):
+    if (len (que[0]) == 81): #and not (que[0][80]==0):
         return que[0]
 
     #If the sudoku is not completed, keep completing it
@@ -66,6 +79,8 @@ def createSudo (visit, que):
             l = l+1
         #If the sudoku is not possible to complete from that state,the length of possibles is 0
         if len(possibles) == 0:
-            createSudo (visit, que[1:])
+            return createSudo (visit, que[1:])
         else:
             que = possibles + que
+            return createSudo (visit, que)
+    return createSudo(visit, que[1:])
