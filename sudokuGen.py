@@ -99,3 +99,15 @@ def createSudo (visit, que):
         #l = l+1
         #print(visit)
     return que[0]
+
+def printSudo (sudo):
+    print (" -----------------------------------------")
+    l = 0 #Keeps track of the square line it is at
+    while l <3:
+        k = 3*l #Keeps track of the line
+        while k < 3*l+3:
+            print ("| ",sudo[9*k], " ", sudo[9*k+1], " ", sudo[9*k+2], " | ", sudo[9*k+3], " ", sudo[9*k+4], " ",  sudo[9*k+5], " | ",  sudo[9*k+6],
+            " ",  sudo[9*k+7], " ",  sudo[9*k+8], " |" )
+            k = k+1
+        print (" -----------------------------------------")
+        l = l+1
