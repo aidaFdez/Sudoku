@@ -3,7 +3,7 @@ import random
 
 visited = [] #Array of the visited states
 queue = [[]] #Array with the queue of states to visit, will be used as a stack.
-#sudoku = numpy.zeros(81)
+
 
 def checkPossible (position, number, sudo):
     numB = position % 9
@@ -43,6 +43,7 @@ def checkPossible (position, number, sudo):
         j = j+1
     return True
 
+#Function that adds the numbers
 def addOne(number):
     if number == 9:
         return 1
@@ -53,8 +54,6 @@ def nextOnes(num, sudo, visit):
     l = 0
     toRet = []
     while l<9:
-        #print (l)
-        #print (checkPossible(len(sudo),num, sudo + [0]))
         if checkPossible(len(sudo),num, sudo + [0]):
             #Do not add if it has been visited
             if not (sudo + [num]) in visit:
@@ -63,27 +62,10 @@ def nextOnes(num, sudo, visit):
         l = l+1
     return toRet
 
-#def createSudo (visit, que):
-    #If the sudoku is completed, then return it
-#    if (len (que[0]) == 81): #and not (que[0][80]==0):
-#        return que[0]
-    #If the sudoku is not completed, keep completing it
-#    if not (que[0] in visit):
-#        a = random.randint(1,9)
-#        possibles = nextOnes(a, que[0])
-        #If the sudoku is not possible to complete from that state,the length of possibles is 0
-#        if len(possibles) == 0:
-#            return createSudo (visit, que[1:])
-#        else:
-#            que = possibles + que
-#            return createSudo (visit, que)
-#    return createSudo(visit, que[1:])
-
+#Function in charge of creating the sudoku
 def createSudo (visit, que):
     l = 0
-    #while not (len(que[0]) == 81):
     while not (len(que[0]) == 81):
-        #print(que)
         if que[0] in visit:
             que = que[1:]
         else:
@@ -94,10 +76,6 @@ def createSudo (visit, que):
                 que = que[1:]
             else:
                 que = possibles + que
-        #print (len(que[0]))
-        #print(" \n")
-        #l = l+1
-        #print(visit)
     return que[0]
 
 def printSudo (sudo):
@@ -111,3 +89,7 @@ def printSudo (sudo):
             k = k+1
         print (" -----------------------------------------")
         l = l+1
+
+if __name__ == "__main__":
+    sudo = createSudo(visited, queue)
+    printSudo(sudo)
