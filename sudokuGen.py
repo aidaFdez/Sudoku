@@ -82,12 +82,12 @@ def nextOnes(num, sudo, visit):
 def createSudo (visit, que):
     l = 0
     #while not (len(que[0]) == 81):
-    while l<100:
-        print(que)
+    while not (len(que[0]) == 81):
+        #print(que)
         if que[0] in visit:
             que = que[1:]
         else:
-            visit = visit + que[0]
+            visit = visit + [que[0]]
             a = random.randint(1,9)
             possibles = nextOnes(a,que[0], visit)
             if len(possibles) == 0:
@@ -95,6 +95,7 @@ def createSudo (visit, que):
             else:
                 que = possibles + que
         #print (len(que[0]))
-        print(" \n")
-        l = l+1
+        #print(" \n")
+        #l = l+1
+        #print(visit)
     return que[0]
