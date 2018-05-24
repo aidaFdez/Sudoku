@@ -7,7 +7,6 @@ queue = [[]] #Array with the queue of states to visit, will be used as a stack.
 
 def checkPossible (position, number, sudo):
     numB = position % 9
-    i = 0
     j = numB
     sudo = sudo + [0]
 
@@ -17,7 +16,7 @@ def checkPossible (position, number, sudo):
             return False
         j = j+9
     k = int(position/9)*9 #Sets the beginning of the row in k
-    l = k+9 #Sets the ending of the row in l
+    #l = k+9 #Sets the ending of the row in l
 
     #Checks that the number does not happen in the row.
     while (k< position):
