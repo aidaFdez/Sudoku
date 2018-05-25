@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class sudoSolver {
-    private ArrayList<Integer[]> queue = new ArrayList<Integer[]>();
-    private ArrayList<Integer[]> visited = new ArrayList<Integer[]>();
+    private ArrayList<int[]> queue = new ArrayList<int[]>();
+    private ArrayList<int[]> visited = new ArrayList<int[]>();
 
     //addOne function as the one I created in Python in the other file.
     public static int addOne (int num){
@@ -71,9 +71,9 @@ public class sudoSolver {
     }
 
     //List of the possible next states given another
-    public static int[][] nextOnes(int num, int[] sudo, int[][] visit){
+    public static ArrayList<int[]> nextOnes(int num, int[] sudo, ArrayList<int[]> visit){
         int l = 0;
-        ArrayList<Integer[]> toRet = new ArrayList<Integer[]>();
+        ArrayList<int[]> toRet = new ArrayList<int[]>();
         while (l<9){
             if (checkPossible(sudo.length, num, sudo)){
                 //Do not add if it has been visited
