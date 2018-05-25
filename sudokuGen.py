@@ -24,10 +24,10 @@ def checkPossible (position, number, sudo):
             return False
         k = k+1
 
+    #Checks the number does not happen in the same square.
     k = int(position/27)*27 #Sets the beginning of the first square of the row of squares
     k = k + (int(numB/3)*3) #Sets the beginning of the square
 
-    #Checks the number does not happen in the same square.
     j = 0
     b = 0
     while ((k< position) and (j < 3) and (b<position)):

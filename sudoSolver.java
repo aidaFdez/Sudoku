@@ -14,7 +14,7 @@ public class sudoSolver {
         }
     }
 
-    public static boolean checkPossible(int[] sudo, int position, int num){
+    public static boolean checkPossible(int position, int num,int[] sudo){
         int numB = position % 9;
         int j = numB;
 
@@ -29,8 +29,62 @@ public class sudoSolver {
         int l = k + 9; //Sets the ending of the row in l
 
         //Checks that the number does not happen in the row
+        while (k < position){
+            if (num == sudo[k]){
+                return false;
+            }
+            k++;
+        }
+
+        //Checks that the number does not happen in the same square
+        k = ((int)(position/27))*27;
+        k = k + ((int)(numB/3))*3;
+
+        j = 0;
+        int b = 0;
+        while ((k < position) && (j < 3) && (b < position)){
+            b = k;
+            l = 0;
+            while(l <3){
+                if(num == sudo[b]){
+                    return false;
+                }
+                b++;
+                l++;
+            }
+            k+= 9;
+            j++;
+        }
 
         return true;
+    }
+
+    //Add a number to the sudoku in the first possible cell
+    public static int[] addNum(int[] sudo, int num){
+        for (int i = 0; i <81; i++){
+            if (sudo[i] == 0){
+                sudo [i] = num;
+                return sudo;
+            }
+        }
+        return sudo;
+    }
+
+    //List of the possible next states given another
+    public static int[][] nextOnes(int num, int[] sudo, int[][] visit){
+        int l = 0;
+        ArrayList<Integer[]> toRet = new ArrayList<Integer[]>();
+        while (l<9){
+            if (checkPossible(sudo.length, num, sudo)){
+                //Do not add if it has been visited
+                if (!(visit.contains(addNum(sudo, num)))){
+                    toRet.add(addNum(sudo, num));
+                }
+            }
+            num = addOne(num);
+            l++;
+        }
+        return toRet;
     }
 
     public static void main (String [] args){
