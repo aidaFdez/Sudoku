@@ -1,8 +1,8 @@
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Arrays;
 
 public class sudoSolver {
-    private ArrayList<int[]> queue = new ArrayList<int[]>();
-    private ArrayList<int[]> visited = new ArrayList<int[]>();
 
     //addOne function as the one I created in Python in the other file.
     public static int addOne (int num){
@@ -70,13 +70,25 @@ public class sudoSolver {
         return sudo;
     }
 
+    //First instance of 0 in the sudoku
+    public static int firstZero (int[] sudo){
+        for (int i = 0; i<sudo.length; i++){
+            if (sudo[i] == 0){
+                return i;
+            }
+        }
+    }
+
     //List of the possible next states given another
     public static ArrayList<int[]> nextOnes(int num, int[] sudo, ArrayList<int[]> visit){
+        ArrayList<int[]> sudoDup = sudo;
         int l = 0;
         ArrayList<int[]> toRet = new ArrayList<int[]>();
+        int ind = firstZero(sudo);
         while (l<9){
-            if (checkPossible(sudo.length, num, sudo)){
+            if (checkPossible(ind, num, sudoDup)){
                 //Do not add if it has been visited
+                //Esto está duplicando los números en sudo, modifícalo!
                 if (!(visit.contains(addNum(sudo, num)))){
                     toRet.add(addNum(sudo, num));
                 }
@@ -88,7 +100,15 @@ public class sudoSolver {
     }
 
     public static void main (String [] args){
-        int a = (int) 3.2;
-        System.out.println(a);
+        int [] a = {1,2,3,4,5,6,7,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        ArrayList<int[]> queue = new ArrayList<int[]>();
+        ArrayList<int[]> visited = new ArrayList<int[]>();
+        ArrayList<int[]> b = (nextOnes(9,a,visited));
+        //for (int i = 0; i<b.size();i++){
+        //    for (int j = 0; j<b.get(i).length; i++){
+        //        System.out.print(b.get(i)[j]);
+        //    }
+        //}
+        //System.out.println(Arrays.deepToString(b.toArray()));
     }
 }
