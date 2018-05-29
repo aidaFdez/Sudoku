@@ -84,11 +84,12 @@ public class sudoSolver {
 
     //List of the possible next states given another
     public static ArrayList<int[]> nextOnes(int num, int[] sudo){
-        int[] sudoDup = sudo;
         int l = 0;
         ArrayList<int[]> toRet = new ArrayList<int[]>();
         int ind = firstZero(sudo);
         while (l<9){
+            int[] sudoDup = new int [sudo.length];
+            System.arraycopy(sudo, 0, sudoDup, 0, sudo.length);
             System.out.println(num);
             if (checkPossible(ind, num, sudoDup)){
                 //int[] b = addNum(sudoDup, num, ind);
