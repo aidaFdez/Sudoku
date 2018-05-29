@@ -70,6 +70,12 @@ public class sudoSolver {
         return sudo;
     }
 
+    //Delete the number in a given index
+    public static int [] deleteNum (int[] sudo, int ind){
+        sudo[ind] = 0;
+        return sudo;
+    }
+
     //First instance of 0 in the sudoku
     public static int firstZero (int[] sudo){
         for (int i = 0; i<sudo.length; i++){
@@ -77,21 +83,21 @@ public class sudoSolver {
                 return i;
             }
         }
+        //If there is not a zero in the array, return 100 as a signal of it.
+        return 100;
     }
 
     //List of the possible next states given another
-    public static ArrayList<int[]> nextOnes(int num, int[] sudo, ArrayList<int[]> visit){
-        ArrayList<int[]> sudoDup = sudo;
+    public static ArrayList<int[]> nextOnes(int num, int[] sudo){
+        int[] sudoDup = sudo;
         int l = 0;
         ArrayList<int[]> toRet = new ArrayList<int[]>();
         int ind = firstZero(sudo);
         while (l<9){
+            System.out.println(num);
             if (checkPossible(ind, num, sudoDup)){
-                //Do not add if it has been visited
-                //Esto está duplicando los números en sudo, modifícalo!
-                if (!(visit.contains(addNum(sudo, num)))){
-                    toRet.add(addNum(sudo, num));
-                }
+                toRet.add(addNum(sudoDup, num));
+                deleteNum(sudoDup, num);
             }
             num = addOne(num);
             l++;
@@ -103,12 +109,12 @@ public class sudoSolver {
         int [] a = {1,2,3,4,5,6,7,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         ArrayList<int[]> queue = new ArrayList<int[]>();
         ArrayList<int[]> visited = new ArrayList<int[]>();
-        ArrayList<int[]> b = (nextOnes(9,a,visited));
+        ArrayList<int[]> b = (nextOnes(9,a));
         //for (int i = 0; i<b.size();i++){
         //    for (int j = 0; j<b.get(i).length; i++){
         //        System.out.print(b.get(i)[j]);
         //    }
         //}
-        //System.out.println(Arrays.deepToString(b.toArray()));
+        System.out.println(Arrays.deepToString(b.toArray()));
     }
 }
