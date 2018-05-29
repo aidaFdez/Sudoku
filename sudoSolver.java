@@ -106,10 +106,25 @@ public class sudoSolver {
     }
 
     public static void main (String [] args){
-        int [] a = {1,2,3,4,5,6,7,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         ArrayList<int[]> queue = new ArrayList<int[]>();
         ArrayList<int[]> visited = new ArrayList<int[]>();
-        ArrayList<int[]> b = (nextOnes(9,a));
+        visited.add(sudo);
+        //int [] a = {1,2,3,4,5,6,7,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        while (firstZero(queue.get(queue.size()-1)) != 100){
+            int [] sudo = queue.get(queue.size()-1);
+            int num = nextInt(9) +1;
+            int ind = firstZero(sudo);
+            if (visited.contains(sudo)){
+                queue.remove(sudo);
+            }
+            else{
+                visited.add(sudo);
+                ArrayList<int []> nexts = nextOnes(num, sudo);
+                queue.addAll(nexts);
+            }
+
+        }
+        System.out.println(Arrays.toString(queue.get(queue.size()-1)));
         //for (int i = 0; i<b.size();i++){
         //    for (int j = 0; j<b.get(i).length; i++){
         //        System.out.print(b.get(i)[j]);
