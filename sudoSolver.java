@@ -60,13 +60,8 @@ public class sudoSolver {
     }
 
     //Add a number to the sudoku in the first possible cell
-    public static int[] addNum(int[] sudo, int num){
-        for (int i = 0; i <81; i++){
-            if (sudo[i] == 0){
-                sudo [i] = num;
-                return sudo;
-            }
-        }
+    public static int[] addNum(int[] sudo, int num, int ind){
+        sudo[ind] = num;
         return sudo;
     }
 
@@ -96,8 +91,12 @@ public class sudoSolver {
         while (l<9){
             System.out.println(num);
             if (checkPossible(ind, num, sudoDup)){
-                toRet.add(addNum(sudoDup, num));
-                deleteNum(sudoDup, num);
+                //int[] b = addNum(sudoDup, num, ind);
+                toRet.add(addNum(sudoDup, num, ind));
+                System.out.println(Arrays.deepToString(toRet.toArray()));
+                System.out.println(Arrays.toString(sudoDup));
+                //System.out.println(Arrays.toString(b));
+                //deleteNum(sudoDup, ind);
             }
             num = addOne(num);
             l++;
@@ -115,6 +114,6 @@ public class sudoSolver {
         //        System.out.print(b.get(i)[j]);
         //    }
         //}
-        System.out.println(Arrays.deepToString(b.toArray()));
+        //System.out.println(Arrays.deepToString(b.toArray()));
     }
 }
