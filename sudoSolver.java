@@ -90,12 +90,12 @@ public class sudoSolver {
         while (l<9){
             int[] sudoDup = new int [sudo.length];
             System.arraycopy(sudo, 0, sudoDup, 0, sudo.length);
-            System.out.println(num);
+            //System.out.println(num);
             if (checkPossible(ind, num, sudoDup)){
                 //int[] b = addNum(sudoDup, num, ind);
                 toRet.add(addNum(sudoDup, num, ind));
-                System.out.println(Arrays.deepToString(toRet.toArray()));
-                System.out.println(Arrays.toString(sudoDup));
+                //System.out.println(Arrays.deepToString(toRet.toArray()));
+                //System.out.println(Arrays.toString(sudoDup));
                 //System.out.println(Arrays.toString(b));
                 //deleteNum(sudoDup, ind);
             }
@@ -106,21 +106,26 @@ public class sudoSolver {
     }
 
     public static void main (String [] args){
-        int[] sudo = args;
+        int[] sudo = new int [args.length];
+        for(int i = 0; i<args.length; i++){
+            //System.out.println(i);
+            sudo[i] = Integer.parseInt(args[i]);
+        }
         ArrayList<int[]> queue = new ArrayList<int[]>();
         ArrayList<int[]> visited = new ArrayList<int[]>();
-        visited.add(sudo);
+        queue.add(sudo);
         //int [] a = {1,2,3,4,5,6,7,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         while (firstZero(queue.get(queue.size()-1)) != 100){
-            int [] sudo = queue.get(queue.size()-1);
-            int num = nextInt(9) +1;
-            int ind = firstZero(sudo);
-            if (visited.contains(sudo)){
-                queue.remove(sudo);
+            int [] sudoVisiting = queue.get(queue.size()-1);
+            Random rand = new Random();
+            int num = rand.nextInt(9) +1;
+            int ind = firstZero(sudoVisiting);
+            if (visited.contains(sudoVisiting)){
+                queue.remove(sudoVisiting);
             }
             else{
-                visited.add(sudo);
-                ArrayList<int []> nexts = nextOnes(num, sudo);
+                visited.add(sudoVisiting);
+                ArrayList<int []> nexts = nextOnes(num, sudoVisiting);
                 queue.addAll(nexts);
             }
 
