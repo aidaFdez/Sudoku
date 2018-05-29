@@ -106,6 +106,7 @@ public class sudoSolver {
     }
 
     public static void main (String [] args){
+        int[] sudo = args;
         ArrayList<int[]> queue = new ArrayList<int[]>();
         ArrayList<int[]> visited = new ArrayList<int[]>();
         visited.add(sudo);
