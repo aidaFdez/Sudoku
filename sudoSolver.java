@@ -90,14 +90,8 @@ public class sudoSolver {
         while (l<9){
             int[] sudoDup = new int [sudo.length];
             System.arraycopy(sudo, 0, sudoDup, 0, sudo.length);
-            //System.out.println(num);
             if (checkPossible(ind, num, sudoDup)){
-                //int[] b = addNum(sudoDup, num, ind);
                 toRet.add(addNum(sudoDup, num, ind));
-                //System.out.println(Arrays.deepToString(toRet.toArray()));
-                //System.out.println(Arrays.toString(sudoDup));
-                //System.out.println(Arrays.toString(b));
-                //deleteNum(sudoDup, ind);
             }
             num = addOne(num);
             l++;
@@ -106,46 +100,36 @@ public class sudoSolver {
     }
 
     public static void main (String [] args){
+        //Parseing the args as an array of integers
         int[] sudo = new int [args.length];
         for(int i = 0; i<args.length; i++){
-            //System.out.println(i);
             sudo[i] = Integer.parseInt(args[i]);
         }
+        //Starting the queue and the visited states
         ArrayList<int[]> queue = new ArrayList<int[]>();
         ArrayList<int[]> visited = new ArrayList<int[]>();
-        queue.add(sudo);
-        //System.out.println(Arrays.deepToString(queue.toArray()));
-        //System.out.println(Arrays.toString(queue.get(queue.size()-1)));
-        //int kkkk = firstZero(queue.get(queue.size()-1));
-        //int ind2 = queue.size()-1;
-        //int [] a = {1,2,3,4,5,6,7,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-        //while (firstZero(queue.get(queue.size()-1)) != 100){
+        queue.add(sudo);//Adding the first state to the queue
+        //Loop that will go through the states in a DFS style
         while (firstZero(queue.get(queue.size()-1)) != 100){
+            //Get the last element in the queue
             int [] sudoVisiting = queue.get(queue.size()-1);
+            //Set a random number
             Random rand = new Random();
             int num = rand.nextInt(9) +1;
-            //System.out.println(num);
+            //Get the index of the first number to be solved
             int ind = firstZero(sudoVisiting);
+            //If the state has already been visited, remove it
             if (visited.contains(sudoVisiting)){
                 queue.remove(sudoVisiting);
             }
+            //Get the next possible states and add them to the queue.
+            //Also add the states to the visited ones
             else{
                 visited.add(sudoVisiting);
                 ArrayList<int []> nexts = nextOnes(num, sudoVisiting);
-                //System.out.println("Los siguientes");
-                //System.out.println(Arrays.deepToString(nexts.toArray()));
                 queue.addAll(nexts);
             }
-            //System.out.println(Arrays.deepToString(queue.toArray()));
-            //ind2 = queue.size()-1;
-            //kkkk = firstZero(queue.get(queue.size()-1));
         }
         System.out.println(Arrays.toString(queue.get(queue.size()-1)));
-        //for (int i = 0; i<b.size();i++){
-        //    for (int j = 0; j<b.get(i).length; i++){
-        //        System.out.print(b.get(i)[j]);
-        //    }
-        //}
-        //System.out.println(Arrays.deepToString(b.toArray()));
     }
 }
