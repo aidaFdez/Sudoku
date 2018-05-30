@@ -22,6 +22,7 @@ The array corresponds to the sudoku:
   | 2   5 |   7   |   6 1 |
   |     7 | 6     | 8 9   |
    -----------------------
+(view in raw format to see the sudoku properly)
 
 
 I used an array for the sudoku, but I think an implementation with a matrix could have been easier.
