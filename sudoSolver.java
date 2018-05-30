@@ -19,7 +19,7 @@ public class sudoSolver {
         int j = numB;
 
         //Checks that number does not happen in the same column.
-        while (j< position){
+        while (j< 81){
             if (num == sudo[j]){
                 return false;
             }
@@ -29,7 +29,7 @@ public class sudoSolver {
         int l = k + 9; //Sets the ending of the row in l
 
         //Checks that the number does not happen in the row
-        while (k < position){
+        while (k < l){
             if (num == sudo[k]){
                 return false;
             }
@@ -42,7 +42,7 @@ public class sudoSolver {
 
         j = 0;
         int b = 0;
-        while ((k < position) && (j < 3) && (b < position)){
+        while ((k < 81) && (j < 3) && (b < position)){
             b = k;
             l = 0;
             while(l <3){
@@ -114,11 +114,17 @@ public class sudoSolver {
         ArrayList<int[]> queue = new ArrayList<int[]>();
         ArrayList<int[]> visited = new ArrayList<int[]>();
         queue.add(sudo);
+        //System.out.println(Arrays.deepToString(queue.toArray()));
+        //System.out.println(Arrays.toString(queue.get(queue.size()-1)));
+        //int kkkk = firstZero(queue.get(queue.size()-1));
+        //int ind2 = queue.size()-1;
         //int [] a = {1,2,3,4,5,6,7,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        //while (firstZero(queue.get(queue.size()-1)) != 100){
         while (firstZero(queue.get(queue.size()-1)) != 100){
             int [] sudoVisiting = queue.get(queue.size()-1);
             Random rand = new Random();
             int num = rand.nextInt(9) +1;
+            //System.out.println(num);
             int ind = firstZero(sudoVisiting);
             if (visited.contains(sudoVisiting)){
                 queue.remove(sudoVisiting);
@@ -126,9 +132,13 @@ public class sudoSolver {
             else{
                 visited.add(sudoVisiting);
                 ArrayList<int []> nexts = nextOnes(num, sudoVisiting);
+                //System.out.println("Los siguientes");
+                //System.out.println(Arrays.deepToString(nexts.toArray()));
                 queue.addAll(nexts);
             }
-
+            //System.out.println(Arrays.deepToString(queue.toArray()));
+            //ind2 = queue.size()-1;
+            //kkkk = firstZero(queue.get(queue.size()-1));
         }
         System.out.println(Arrays.toString(queue.get(queue.size()-1)));
         //for (int i = 0; i<b.size();i++){
