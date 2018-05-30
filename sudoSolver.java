@@ -99,12 +99,8 @@ public class sudoSolver {
         return toRet;
     }
 
-    public static void main (String [] args){
-        //Parseing the args as an array of integers
-        int[] sudo = new int [args.length];
-        for(int i = 0; i<args.length; i++){
-            sudo[i] = Integer.parseInt(args[i]);
-        }
+    //Function used to solve the sudoku
+    public static int[] solveSudo(int[] sudo){
         //Starting the queue and the visited states
         ArrayList<int[]> queue = new ArrayList<int[]>();
         ArrayList<int[]> visited = new ArrayList<int[]>();
@@ -130,6 +126,31 @@ public class sudoSolver {
                 queue.addAll(nexts);
             }
         }
-        System.out.println(Arrays.toString(queue.get(queue.size()-1)));
+        return (queue.get(queue.size()-1));
+    }
+
+    //Function that prints the sudoku nicely
+    public static void printSudo (int[] sudo){
+        System.out.println(" -----------------------");
+        for(int i = 0; i<3;i++){
+            int k = 3*i;
+            while(k < 3*i +3){
+                System.out.println("| " + sudo[9*k] + " " + sudo[9*k+1] + " " + sudo[9*k+2] + " | " + sudo[9*k+3] + " " +
+                sudo[9*k+4] + " " + sudo[9*k+5] + " | " + sudo[9*k+6] + " " + sudo[9*k+7] + " " + sudo[9*k+8] + " |");
+                k++;
+            }
+        System.out.println(" -----------------------");
+        }
+    }
+
+    public static void main (String [] args){
+        //Parseing the args as an array of integers
+        int[] sudo = new int [args.length];
+        for(int i = 0; i<args.length; i++){
+            sudo[i] = Integer.parseInt(args[i]);
+        }
+
+        int[] sol = solveSudo(sudo);
+        printSudo(sol);
     }
 }
